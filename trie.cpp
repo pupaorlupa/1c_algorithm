@@ -49,6 +49,7 @@ public:
       current_vertex = (*(place.first)).second;
     }
 
+    // последняя вершина - терминальная
     history.push_back(current_vertex);
     auto& vert = trie[current_vertex];
     ++vert.terminal_score;
@@ -77,6 +78,7 @@ public:
       state.Clear();
     }
 
+    // проходимся по бору и копим префикс
     int current_vertex_index = state.vertex_index;
     for (auto letter : word) {
       auto& vert = trie[current_vertex_index];
@@ -93,6 +95,7 @@ public:
 
     std::string ret_prefix = state.prefix;
 
+    // делаем предсказание
     while (current_vertex_index != trie[current_vertex_index].best_next_index) {
       current_vertex_index = trie[current_vertex_index].best_next_index;
       ret_prefix += trie[current_vertex_index].letter;

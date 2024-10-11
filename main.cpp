@@ -49,8 +49,13 @@ int main() {
             if (text.find(" ") != std::string::npos) {
                 is_new = true;
             }
-            std::cout << "[ANS]Suggested: ";
-            std::cout << trie.Predict(*(SplitWords(text).end() - 1), is_new) << std::endl;
+            auto splitted = SplitWords(text);
+            if (splitted.size() == 0) {
+                std::cout << "[ANS]Got empty input" << std::endl;
+            } else {
+                std::cout << "[ANS]Suggested: ";
+                std::cout << trie.Predict(*(splitted.end() - 1), is_new) << std::endl;
+            }
         } else if (command == "exit") {
             std::cout << "[ANS]Программа успешно завершилась." << std::endl;
             return 0;
